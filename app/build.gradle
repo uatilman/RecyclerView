@@ -4,12 +4,13 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 34
+    namespace "otus.gpb.recyclerview"
 
     defaultConfig {
         applicationId "otus.gpb.recyclerview"
-        minSdk 23
-        targetSdk 32
+        minSdk 26
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
