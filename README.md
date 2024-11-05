@@ -2,7 +2,7 @@
 
 **Цели работы**: изучить работу с основными компонентами `Recyclerview`, научиться реализовывать пагинацию, познакомиться с механизмом `DiffUtil`
 
-![Telegram](readme/telegram.png)
+![Telegram](readme/telegram.webp)
 
 **Задачи**:
 1. Сверстайте экран Telegram согласно макету в [Figma](https://www.figma.com/community/file/988466927624217947/telegram-design-system). 
