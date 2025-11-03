@@ -11,7 +11,7 @@
 
     <!-- Leading icon -->
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/product_image"
+        android:id="@+id/chat_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/last_message_container"
-        app:layout_constraintStart_toEndOf="@id/product_image"
+        app:layout_constraintStart_toEndOf="@id/chat_image"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/chat_name"
                 app:layout_constraintTop_toTopOf="parent"
@@ -73,25 +72,25 @@
 
 
         <TextView
-            android:id="@+id/category"
+            android:id="@+id/last_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/description"
+            app:layout_constraintBottom_toTopOf="@+id/last_message"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chat_name_container"
             tools:text="Category" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/last_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/category"
-            app:layout_constraintTop_toBottomOf="@id/category"
+            app:layout_constraintStart_toStartOf="@id/last_user_name"
+            app:layout_constraintTop_toBottomOf="@id/last_user_name"
             tools:text="Supporting line text lorem ipsum dolor sit amet, consectetur." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
