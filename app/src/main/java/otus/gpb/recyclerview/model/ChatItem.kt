@@ -3,9 +3,10 @@ package otus.gpb.recyclerview.model
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import otus.gpb.recyclerview.R
+import java.util.UUID
 
 data class ChatItem(
-    val id: Int,
+    val id: UUID,
     val imageId:Int,
     val chatName: String,
     val lastUserName: String,

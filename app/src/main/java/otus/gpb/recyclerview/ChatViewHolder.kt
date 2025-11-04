@@ -3,6 +3,7 @@ package otus.gpb.recyclerview
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import otus.gpb.recyclerview.databinding.ChatItemBinding
 import otus.gpb.recyclerview.model.ChatItem
@@ -23,6 +24,7 @@ class ChatViewHolder(
     val chatPinnedImage: ImageView = cartItemBinding.pinned
 
 
+
     fun bind(chatItem: ChatItem) {
         with(chatItem) {
             chatImage.setImageResource(imageId)
@@ -33,11 +35,8 @@ class ChatViewHolder(
             muteImage.visibility = if (isMuted) View.VISIBLE else View.GONE
 
             messageStatusImage.setImageResource(messageStatus.iconId)
-            messageStatusImage.setBackgroundColor(
-                cartItemBinding.root.resources.getColor(
-                    messageStatus.colorId
-                )
-            )
+            messageStatusImage.setColorFilter(ContextCompat.getColor(cartItemBinding.root.context, messageStatus.colorId),
+                android.graphics.PorterDuff.Mode.SRC_IN)
             lastMessageTimeText.text = lastMessageTime
             chatPinnedImage.visibility = if (isPinned) View.VISIBLE else View.GONE
 
