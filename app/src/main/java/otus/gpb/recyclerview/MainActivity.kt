@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(), ItemListener {
 
     private val chatList: MutableList<ChatItem> by lazy { generateTestData() }
     private val chatAdapter: ChatAdapter by lazy { ChatAdapter(chatList, this) }
+    private val chatDiffAdapter: ChatDiffAdapter by lazy { ChatDiffAdapter( this) }
     private val random = Random()
 
     private val formatter = DateTimeFormatter.ofPattern("HH:mm")
@@ -30,20 +31,22 @@ class MainActivity : AppCompatActivity(), ItemListener {
 
         with(activityMainBinding.chatListView) {
             addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayout.VERTICAL))
-            adapter = chatAdapter
+            adapter = chatDiffAdapter
+            chatDiffAdapter.submitList(chatList)
         }
     }
 
 
+    /* TODO: вынести в модель */
     private fun generateTestData(): MutableList<ChatItem> {
         return Array(15) { index: Int ->
             ChatItem(
                 UUID.randomUUID(),
                 R.drawable.chat_item_icon,
-                "chatName " + index,
-                "lastUserName " + index,
-                "lastMessage " + index,
-                "title " + index,
+                "Chat Name " + index,
+                "User Name " + index,
+                "Last Message " + index,
+                "Title " + index,
                 random.nextBoolean(),
                 random.nextBoolean(),
                 MessageStatus.entries[random.nextInt(3)],
