@@ -2,8 +2,10 @@ package otus.gpb.recyclerview
 
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import otus.gpb.recyclerview.databinding.ActivityMainBinding
 import otus.gpb.recyclerview.model.ChatItem
 import otus.gpb.recyclerview.model.MessageStatus
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity(), ItemListener {
 
     private val chatList: MutableList<ChatItem> by lazy { generateTestData() }
     private val chatAdapter: ChatAdapter by lazy { ChatAdapter(chatList, this) }
-    private val chatDiffAdapter: ChatDiffAdapter by lazy { ChatDiffAdapter( this) }
+    private val chatDiffAdapter: ChatDiffAdapter by lazy { ChatDiffAdapter(this) }
     private val random = Random()
 
     private val formatter = DateTimeFormatter.ofPattern("HH:mm")
@@ -31,8 +33,9 @@ class MainActivity : AppCompatActivity(), ItemListener {
 
         with(activityMainBinding.chatListView) {
             addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayout.VERTICAL))
+            ItemTouchHelper(ChatItemTouchHelper(this@MainActivity)).attachToRecyclerView(this)
             adapter = chatDiffAdapter
-            chatDiffAdapter.submitList(chatList)
+            chatDiffAdapter.submitList(chatList.toList())
         }
     }
 
@@ -59,6 +62,12 @@ class MainActivity : AppCompatActivity(), ItemListener {
 
     override fun onItemClick(id: UUID) {
         TODO("Not yet implemented")
+    }
+
+    override fun onSwipe(id: UUID) {
+        chatList.removeIf { it.id == id }
+        chatDiffAdapter.submitList(chatList.toList())
+        Toast.makeText(this, "Item swiped: $id", Toast.LENGTH_SHORT).show()
     }
 
 }
