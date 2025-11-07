@@ -39,7 +39,9 @@ class ChatViewHolder(
                 android.graphics.PorterDuff.Mode.SRC_IN)
             lastMessageTimeText.text = lastMessageTime
             chatPinnedImage.visibility = if (isPinned) View.VISIBLE else View.GONE
-
+            cartItemBinding.root.setOnClickListener {
+                itemListener.onItemClick(id)
+            }
         }
 
     }

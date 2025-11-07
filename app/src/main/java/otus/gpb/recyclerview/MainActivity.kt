@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), ItemListener {
     }
 
     override fun onItemClick(id: UUID) {
-        TODO("Not yet implemented")
+        Toast.makeText(this, "Item clicked: $id", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSwipe(id: UUID) {
