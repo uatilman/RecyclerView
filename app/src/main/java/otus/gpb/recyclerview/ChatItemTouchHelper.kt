@@ -34,6 +34,7 @@ class ChatItemTouchHelper(private val listener: ItemListener) : ItemTouchHelper.
 
     /**
      * source: https://stackoverflow.com/questions/30820806/adding-a-colored-background-with-text-icon-under-swiped-row-when-using-androids
+     * Источник из ДЗ (не загружается без vpn) https://www.digitalocean.com/community/tutorials/android-recyclerview-swipe-to-delete-undo
      * */
     override fun onChildDraw(
         c: Canvas,
