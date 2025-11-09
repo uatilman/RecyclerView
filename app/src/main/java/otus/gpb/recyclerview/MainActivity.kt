@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import otus.gpb.recyclerview.databinding.ActivityMainBinding
+import otus.gpb.recyclerview.repository.ChatRepository
 import otus.gpb.recyclerview.stat.PageEventHelper
 import otus.gpb.recyclerview.view_model.ChatViewModel
 import java.util.UUID
@@ -19,7 +20,11 @@ class MainActivity : AppCompatActivity(), ItemListener {
 
     private val chatDiffAdapter: ChatDiffAdapter by lazy { ChatDiffAdapter(this) }
 
-    private val viewModel: ChatViewModel by viewModels()
+    private val chatRepository: ChatRepository by lazy { application.asClass<App>()?.chatRepository
+        ?: throw IllegalStateException("Can`t get App class") }
+    private val viewModel: ChatViewModel by viewModels {
+        ChatViewModel.Factory(chatRepository)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +36,8 @@ class MainActivity : AppCompatActivity(), ItemListener {
     }
 
     private fun addObservers() {
-        val app = application as? App
-        app?.let {
-            lifecycle.addObserver(PageEventHelper((application as App).statService))
+        application.asClass<App>()?.let {
+            lifecycle.addObserver(PageEventHelper(it.statService))
         }
     }
 

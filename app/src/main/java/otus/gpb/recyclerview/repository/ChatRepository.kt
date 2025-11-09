@@ -7,17 +7,23 @@ import java.time.LocalDateTime
 import java.util.Random
 import java.util.UUID
 
-class ChatRepository(
-    private val serverListener: ChatServerListener
-) {
+class ChatRepository() {
 
     private val random = Random()
     val pageSize = 10
     private var page = 1
     private var testData: MutableList<ChatItem>
 
+    private val listeners: MutableList<ChatServerListener> = mutableListOf()
+
+    fun subscribe(listener: ChatServerListener) {
+        listeners.add(listener)
+    }
+
     init {
         testData = generateTestData()
+
+        // имитация подгрузки данных через с сервера через socket
         object : Thread() {
             override fun run() {
                 while (true) {
@@ -27,22 +33,26 @@ class ChatRepository(
                     item.isVerified = false
                     testData =
                         testData.toMutableList().apply { sortByDescending { it.lastMessageTime } }
-                    serverListener.onChatItemUpdated(getDataPage())
+                    notifyListeners()
                 }
             }
         }.start()
 
     }
 
+    private fun notifyListeners() {
+        listeners.forEach { it.onChatItemUpdated(getDataPage()) }
+    }
+
     fun loadNextItems() {
         page++
-        serverListener.onChatItemUpdated(getDataPage())
+        notifyListeners()
     }
 
     fun removeItem(id: UUID) {
         testData = testData.filter { it.id != id }
             .toMutableList() // удаляем элемент по id и возвращаем новый список  testData.removeIf { it.id != id }
-        serverListener.onChatItemUpdated(getDataPage())
+        notifyListeners()
     }
 
     fun getDataPage(): MutableList<ChatItem> {
