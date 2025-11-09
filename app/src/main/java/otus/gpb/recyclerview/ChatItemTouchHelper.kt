@@ -69,9 +69,9 @@ class ChatItemTouchHelper(private val listener: ItemListener) : ItemTouchHelper.
                 /* paint = */ p
             )
 
-//            fixme magic numbers to dimensions
+//            fixme magic numbers to dimensions, add relative counters
             getVectorBitmap(context, R.drawable.archive)?.let { bitmap ->
-                val left = itemViewRight - convertDpToPx(24, resources) - bitmap.getWidth()
+                val left = itemViewRight - convertDpToPx(50, resources) - bitmap.getWidth()
                 val top = itemViewTop + (itemViewBottom - itemViewTop - bitmap.getHeight()) * 0.4f
                 c.drawBitmap(
                     /* bitmap = */ bitmap,
@@ -82,8 +82,8 @@ class ChatItemTouchHelper(private val listener: ItemListener) : ItemTouchHelper.
 
                 c.drawText(
                     "Archive",
-                    left - convertDpToPx(15, resources),
-                    top + convertDpToPx(40, resources),
+                    left - convertDpToPx(30, resources),
+                    top + convertDpToPx(50, resources),
                     Paint().apply {
                         color = ContextCompat.getColor(context, R.color.white)
                         textSize = 36f
