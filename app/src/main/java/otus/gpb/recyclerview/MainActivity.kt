@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import otus.gpb.recyclerview.databinding.ActivityMainBinding
 import otus.gpb.recyclerview.model.ChatItem
 import otus.gpb.recyclerview.model.MessageStatus
+import otus.gpb.recyclerview.stat.PageEventHelper
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.Random
@@ -37,6 +38,11 @@ class MainActivity : AppCompatActivity(), ItemListener {
             adapter = chatDiffAdapter
             chatDiffAdapter.submitList(chatList.toList())
         }
+        val app = application as? App
+        app?.let {
+            lifecycle.addObserver(PageEventHelper((application as App).statService))
+        }
+
     }
 
 
