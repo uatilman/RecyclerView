@@ -37,7 +37,7 @@ class ChatViewHolder(
             messageStatusImage.setImageResource(messageStatus.iconId)
             messageStatusImage.setColorFilter(ContextCompat.getColor(cartItemBinding.root.context, messageStatus.colorId),
                 android.graphics.PorterDuff.Mode.SRC_IN)
-            lastMessageTimeText.text = lastMessageTime
+            lastMessageTimeText.text = lastMessageViewTime
             chatPinnedImage.visibility = if (isPinned) View.VISIBLE else View.GONE
             cartItemBinding.root.setOnClickListener {
                 itemListener.onItemClick(id)
